@@ -35,9 +35,9 @@ function MapReady({ onMapReady }: { onMapReady?: (map: LeafletMap) => void }) {
 function portIcon(marker: MapMarker, active: boolean) {
   return L.divIcon({
     className: "dockflow-leaflet-marker-wrapper",
-    html: `<span class="dockflow-leaflet-marker${active ? " is-active" : ""}"><em>${marker.title ?? marker.label}</em></span>`,
-    iconSize: [180, 30],
-    iconAnchor: [0, 15],
+    html: `<span class="dockflow-leaflet-marker${active ? " is-active" : ""}"></span>`,
+    iconSize: [22, 22],
+    iconAnchor: [11, 11],
   });
 }
 
@@ -77,9 +77,9 @@ export function MapView({
       className="h-full w-full bg-[#07111c]"
     >
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        subdomains="abcd"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        subdomains="abc"
         maxZoom={20}
       />
       {indiaBoundary && <>
@@ -94,6 +94,7 @@ export function MapView({
         icon={portIcon(marker, marker.id === activeMarkerId)}
         eventHandlers={{ click: () => onMarkerClick?.(marker) }}
       >
+        <Tooltip direction="top" offset={[0, -10]} className="dockflow-leaflet-tooltip">{marker.title ?? marker.label}</Tooltip>
       </Marker>)}
     </MapContainer>
     <div className="dockflow-map-compass" aria-label="North"><span>N</span><i /></div>
