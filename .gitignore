@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.*
+dist/
+build/
+.manus-logs/
+*.log
+coverage/
+.DS_Store
